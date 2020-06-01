@@ -47,7 +47,7 @@ spec:
             - -c
             - "start-zookeeper \
               --servers=3 \
-              --data_dir=/mnt/zookeeper/ \
+              --data_dir=/mnt/zookeeper \
               --data_log_dir=/var/lib/zookeeper/data/log \
               --conf_dir=/opt/zookeeper/conf \
               --client_port=2181 \
