@@ -50,7 +50,7 @@ spec:
             - "start-zookeeper \
               --servers=3 \
               --data_dir=/mnt/zookeeper \
-              --data_log_dir=/var/lib/zookeeper/data/log \
+              --data_log_dir=/mnt/zookeeper/log \
               --conf_dir=/opt/zookeeper/conf \
               --client_port=2181 \
               --election_port=3888 \
@@ -84,9 +84,9 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /mnt/zookeeper
-      securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
+      # securityContext:
+      #   runAsUser: 1000
+      #   fsGroup: 1000
       volumes:
         - name: data
           persistentVolumeClaim:
