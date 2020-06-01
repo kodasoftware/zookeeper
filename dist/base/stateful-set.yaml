@@ -31,6 +31,8 @@ spec:
         - name: kubernetes-zookeeper
           imagePullPolicy: Always
           image: "k8s.gcr.io/kubernetes-zookeeper:1.0-3.4.10"
+          securityContext:
+            privileged: true
           resources:
             requests:
               memory: "1Gi"
