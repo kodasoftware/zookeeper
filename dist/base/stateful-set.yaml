@@ -26,6 +26,10 @@ spec:
                     values:
                       - zk
               topologyKey: "kubernetes.io/hostname"
+      volumes:
+        - name: graphstore-override
+          configMap:
+            name: graphstore-override-rw
       containers:
         - name: kubernetes-zookeeper
           imagePullPolicy: Always
