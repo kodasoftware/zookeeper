@@ -29,7 +29,7 @@ spec:
       volumes:
         - name: graphstore-override
           configMap:
-            name: graphstore-override-rw
+            name: graphstore-override
       containers:
         - name: kubernetes-zookeeper
           imagePullPolicy: Always
