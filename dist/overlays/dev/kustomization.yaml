@@ -1,0 +1,7 @@
+namespace: dev
+namePrefix: dev-
+replicas:
+  - name: zk
+    count: 1
+bases:
+  - ../../base

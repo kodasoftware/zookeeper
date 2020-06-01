@@ -1,0 +1,10 @@
+namespace: default
+
+replicas:
+  - name: zk
+    count: 1
+
+resources:
+  - pod-disruption-budget.yaml
+  - service.yaml
+  - stateful-set.yaml
