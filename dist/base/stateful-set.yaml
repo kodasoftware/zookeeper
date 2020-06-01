@@ -13,7 +13,6 @@ spec:
   podManagementPolicy: OrderedReady
   template:
     metadata:
-      name: k8s-zookeeper
       labels:
         app: zk
     spec:
