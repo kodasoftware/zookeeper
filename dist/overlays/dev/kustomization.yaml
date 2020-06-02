@@ -3,6 +3,9 @@ namePrefix: dev-
 replicas:
   - name: zk
     count: 3
+images:
+  - name: gcr.io/sauce-gcr--hawk/graphstore
+    newTag: 0.3.2
 bases:
   - ../../base
 resources:
