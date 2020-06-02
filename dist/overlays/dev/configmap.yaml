@@ -44,7 +44,7 @@ data:
     com.bigdata.journal.AbstractJournal.bufferMode=DiskRW
     com.bigdata.journal.AbstractJournal.readOnly=false
     com.bigdata.journal.AbstractJournal.file=/mnt/graphstore/blazegraph.jnl
-    com.bigdata.journal.AbstractJournal.writeCacheBufferCount=2000
+    com.bigdata.journal.AbstractJournal.writeCacheBufferCount=0
 
     com.bigdata.journal.Journal.collectPlatformStatistics=true
     # com.bigdata.journal.Journal.collectQueueStatistics=false
