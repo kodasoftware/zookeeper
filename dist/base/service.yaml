@@ -28,25 +28,3 @@ spec:
     name: client
   selector:
     app: zk
-
----
-
-kind: Service
-apiVersion: v1
-metadata:
-  name: graphstore
-  labels:
-    app: graphstore
-  # annotations:
-    # Comment out the backend config below to revoke it if deployed into a cluster
-    # beta.cloud.google.com/backend-config: '{"default":"graphstore-http", "ports": {"80":"graphstore-http"}}'
-    # cloud.google.com/app-protocols: '{"graphstore-http":"HTTP"}'
-spec:
-  selector:
-    app: zk
-  type: NodePort
-  ports:
-  - name: graphstore-http
-    protocol: TCP
-    port: 80
-    targetPort: 9999

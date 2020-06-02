@@ -26,10 +26,6 @@ spec:
                     values:
                       - zk
               topologyKey: "kubernetes.io/hostname"
-      volumes:
-        - name: graphstore-override
-          configMap:
-            name: dev-graphstore-override
       containers:
         - name: kubernetes-zookeeper
           imagePullPolicy: Always
@@ -87,36 +83,6 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /var/lib/zookeeper
-        - image: gcr.io/sauce-gcr--hawk/graphstore
-          name:  graphstore
-          livenessProbe:
-            httpGet:
-              path: /blazegraph/status?health
-              port: 9999
-            initialDelaySeconds: 10
-            timeoutSeconds: 40
-          readinessProbe:
-            httpGet:
-              path: /blazegraph/status?health
-              port: 9999
-            initialDelaySeconds: 10
-            timeoutSeconds: 40
-          envFrom:
-            - configMapRef:
-                name: graphstore-mem-alloc
-          volumeMounts:
-            - name: datadir
-              mountPath: /mnt/graphstore/
-              subPath: blazegraph/
-            - name: graphstore-override
-              mountPath: "/opt/sauce/"
-              readOnly: true
-          imagePullPolicy: Always
-          securityContext:
-            privileged: true
-          ports:
-            - containerPort: 9999
-              name: http
   volumeClaimTemplates:
     - metadata:
         name: datadir
