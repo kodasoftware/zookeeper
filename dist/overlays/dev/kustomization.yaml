@@ -1,5 +1,4 @@
 namespace: dev
-namePrefix: dev-
 replicas:
   - name: zk
     count: 3
