@@ -1,8 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: dev
 replicas:
   - name: zk
     count: 3
-bases:
+resources:
   - ../../base
-# resources:
 #   - configmap.yaml
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: StatefulSet
+      name: zk
+    patch: |-
+      - op: add
+        path: /spec
+        value:
+          volumeClaimTemplates:
+            - metadata:
+                name: datadir
+              spec:
+                accessModes: 
+                  - ReadWriteOnce
+                  - ReadOnlyMany
+                resources:
+                  requests:
+                    storage: 10Gi
+      - op: add
+        path: /spec/template/spec/containers/0
+        value:
+          volumeMounts:
+            - name: datadir
+              mountPath: /var/lib/zookeeper
