@@ -15,21 +15,19 @@ patches:
       name: zk
     patch: |-
       - op: add
-        path: /spec
+        path: /spec/volumeClaimTemplates
         value:
-          volumeClaimTemplates:
-            - metadata:
-                name: datadir
-              spec:
-                accessModes: 
-                  - ReadWriteOnce
-                  - ReadOnlyMany
-                resources:
-                  requests:
-                    storage: 10Gi
+          - metadata:
+              name: datadir
+            spec:
+              accessModes: 
+                - ReadWriteOnce
+                - ReadOnlyMany
+              resources:
+                requests:
+                  storage: 10Gi
       - op: add
-        path: /spec/template/spec/containers/0
+        path: /spec/template/spec/containers/0/volumeMounts
         value:
-          volumeMounts:
-            - name: datadir
-              mountPath: /var/lib/zookeeper
+          - name: datadir
+            mountPath: /var/lib/zookeeper
