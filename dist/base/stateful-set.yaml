@@ -61,7 +61,7 @@ spec:
               --max_client_cnxns=60 \
               --snap_retain_count=3 \
               --purge_interval=12 \
-              --max_session_timeout=40000 \
+              --max_session_timeout=60000 \
               --min_session_timeout=4000 \
               --log_level=INFO"
           readinessProbe:
