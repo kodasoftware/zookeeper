@@ -63,3 +63,11 @@ patches:
         value:
           - name: datadir
             mountPath: /var/lib/zookeeper
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          ZK_LOG_LEVEL: INFO
+          ZK_DATA_DIR: /data
+          ZK_DATA_LOG_DIR: /data/datalog
+          ZK_LOG_DIR: /data/log
+          ZK_REPLICAS: 3
