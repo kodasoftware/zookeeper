@@ -26,5 +26,6 @@ spec:
   ports:
   - port: 2181
     name: client
+  clusterIP: None
   selector:
     app: zk
