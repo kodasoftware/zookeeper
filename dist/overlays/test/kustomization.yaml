@@ -66,8 +66,13 @@ patches:
       - op: add
         path: /spec/template/spec/containers/0/env
         value:
-          ZK_LOG_LEVEL: INFO
-          ZK_DATA_DIR: /data
-          ZK_DATA_LOG_DIR: /data/datalog
-          ZK_LOG_DIR: /data/log
-          ZK_REPLICAS: 3
+          - name: ZK_LOG_LEVEL
+            value: INFO
+          - name: ZK_DATA_DIR
+            value: /data
+          - name: ZK_DATA_LOG_DIR
+            value: /data/datalog
+          - name: ZK_LOG_DIR
+            value: /data/log
+          - name: ZK_REPLICAS
+            value: 3
