@@ -75,3 +75,13 @@ patches:
             value: /data/log
           - name: ZK_REPLICAS
             value: "3"
+      - op: add
+        path: /spec/template/spec/affinity/nodeAffinity
+        value: 
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: cloud.google.com/gke-nodepool
+                  operator: In
+                  values:
+                    - test
