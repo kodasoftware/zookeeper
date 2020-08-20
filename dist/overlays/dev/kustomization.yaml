@@ -6,7 +6,6 @@ replicas:
     count: 3
 resources:
   - ../../base
-#   - configmap.yaml
 patches:
   - target:
       group: apps

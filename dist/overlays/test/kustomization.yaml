@@ -10,7 +10,6 @@ replicas:
     count: 3
 resources:
   - ../../base
-#   - configmap.yaml
 patches:
   - target:
       group: apps
@@ -62,7 +61,7 @@ patches:
         path: /spec/template/spec/containers/0/volumeMounts
         value:
           - name: datadir
-            mountPath: /var/lib/zookeeper
+            mountPath: /data
       - op: add
         path: /spec/template/spec/containers/0/env
         value:
