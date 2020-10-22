@@ -6,6 +6,10 @@ replicas:
     count: 3
 resources:
   - ../../base
+images:
+  - name: k8s.gcr.io/kubernetes-zookeeper
+    newName: stardog/k8szk
+    newTag: 3.4.14
 patches:
   - target:
       group: apps
@@ -13,6 +17,34 @@ patches:
       kind: StatefulSet
       name: zk
     patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/command
+        value:
+          - /bin/bash
+          - -xec
+          - zkGenConfig.sh && exec zkServer.sh start-foreground
+      - op: replace
+        path: /spec/template/spec/containers/0/readinessProbe
+        value:
+          exec:
+            command:
+              - zkOk.sh
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+      - op: replace
+        path: /spec/template/spec/containers/0/livenessProbe
+        value:
+          exec:
+            command:
+              - zkOk.sh
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
       - op: add
         path: /spec/volumeClaimTemplates
         value:
@@ -40,3 +72,16 @@ patches:
                   operator: In
                   values:
                     - dev
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: ZK_LOG_LEVEL
+            value: INFO
+          - name: ZK_DATA_DIR
+            value: /data
+          - name: ZK_DATA_LOG_DIR
+            value: /data/datalog
+          - name: ZK_LOG_DIR
+            value: /data/log
+          - name: ZK_REPLICAS
+            value: "3"
